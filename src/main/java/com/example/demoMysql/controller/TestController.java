@@ -22,15 +22,10 @@ public class TestController {
         List<Map<String, Object>> list = jdbcTemplate.queryForList(sql);//解析数据，到这里已经完成网页功能。
         //对于每一行数据，打印到本地。
         for (Map<String, Object> map : list) {
-            Set<Map.Entry<String, Object>> entries = map.entrySet();//一个map多条数据，转成set<key,val>的形式
-            if (entries != null) {
-                Iterator<Map.Entry<String, Object>> iterator = entries.iterator();//用迭代器访问
-                while (iterator.hasNext()) {
-                    Map.Entry<String, Object> entry = (Map.Entry<String, Object>) iterator.next();
-                    Object key = entry.getKey();
-                    Object value = entry.getValue();
-                    System.out.println(key + ":" + value);
-                }
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                Object key = entry.getKey();
+                Object val = entry.getValue();
+                System.out.println(key + "-->" + val);
             }
         }
         return list;
